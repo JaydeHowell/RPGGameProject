@@ -6,5 +6,6 @@ public record CharacterStats(
             String weapon,
             int armor,
             int attackDice,
-            int damageDice
+            int damageDice,
+            boolean isSpell
     ) {}

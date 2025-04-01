@@ -7,19 +7,22 @@ public class StatsTemplates {
             "Sword",
             16,
             20,
-            8);
+            8,
+            false);
     public static final CharacterStats MAGE = new CharacterStats(
             30,
             1,
             "Book",
             12,
             20,
-            20);
+            20,
+            true);
     public static final CharacterStats ROGUE = new CharacterStats(
             45,
             1,
             "Dagger",
             14,
             20,
-            10);
+            10,
+            false);
 }

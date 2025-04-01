@@ -19,6 +19,10 @@ public abstract class Character {
         return damage;
     }
 
+    public boolean isSpell() {
+        return stats.isSpell();
+    }
+
     public boolean isAlive () {
         return currentHealth > 0;
     }

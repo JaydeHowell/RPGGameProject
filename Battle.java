@@ -46,7 +46,13 @@ public class Battle {
 
     private void attack(Character attacker, Character defender) {
         Console.printLargePause(attacker.getAttackFlavor(defender));
-        int toHit = hitDice.rollDice(1);
+        int toHit;
+        if (defender instanceof Rogue rogue && attacker.isSpell()) {
+            Console.printLargePause(defender.getName() + " is showing lightning quick reflexes!");
+            toHit = hitDice.rollWithDisadvantage();
+        } else {
+            toHit = hitDice.rollDice(1);
+        }
         if (toHit >= HIT_THRESHOLD) {
             Console.printSmallPause("It's a hit!");
             attacker.setLastAttackMissed(false);
