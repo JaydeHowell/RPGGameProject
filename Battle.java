@@ -57,7 +57,7 @@ public class Battle {
             Console.printSmallPause("It's a hit!");
             attacker.setLastAttackMissed(false);
             int damage = attacker.dealDamage(defender);
-            int damageTaken = defender.takeDamage(damage);
+            int damageTaken = defender.takeDamage(damage, attacker);
             Console.printSmallPause(defender.getName() + " takes " + damageTaken + " damage.");
             if (defender instanceof Fighter fighter && fighter.shouldUseSecondWind()) {
                 fighter.useSecondWind();

@@ -23,11 +23,15 @@ public class Fighter extends Character{
     }
 
     @Override
-    public int takeDamage(int damage) {
-        int reduced = damage - 2;
-        super.takeDamage(reduced);
-        System.out.println(getName() + "'s heavy armor reduced the damage by 2");
-        return reduced;
+    public int takeDamage(int damage, Character attacker) {
+        if (!attacker.isSpell()) {
+            int reduced = damage - 2;
+            super.takeDamage(reduced, attacker);
+            System.out.println(getName() + "'s heavy armor reduced the damage by 2");
+            return reduced;
+        } else {
+            return super.takeDamage(damage, attacker);
+        }
     }
 
     @Override

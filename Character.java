@@ -14,7 +14,7 @@ public abstract class Character {
         this.currentHealth = stats.maxHealth();
     }
 
-    public int takeDamage (int damage) {
+    public int takeDamage (int damage, Character attacker) {
         currentHealth -= damage;
         return damage;
     }
