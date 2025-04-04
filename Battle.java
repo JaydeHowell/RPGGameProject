@@ -47,24 +47,39 @@ public class Battle {
     private void attack(Character attacker, Character defender) {
         Console.printLargePause(attacker.getAttackFlavor(defender));
         int toHit;
-        if (defender instanceof Rogue rogue && attacker.isSpell()) {
-            Console.printLargePause(defender.getName() + " is showing lightning quick reflexes!");
-            toHit = hitDice.rollWithDisadvantage();
-        } else {
-            toHit = hitDice.rollDice(1);
-        }
-        if (toHit >= HIT_THRESHOLD) {
-            Console.printSmallPause("It's a hit!");
-            attacker.setLastAttackMissed(false);
-            int damage = attacker.dealDamage(defender);
-            int damageTaken = defender.takeDamage(damage, attacker);
-            Console.printSmallPause(defender.getName() + " takes " + damageTaken + " damage.");
-            if (defender instanceof Fighter fighter && fighter.shouldUseSecondWind()) {
-                fighter.useSecondWind();
+        switch (defender) {
+            case Rogue rogue when attacker.isSpell() -> {
+                Console.printLargePause(defender.getName() + " is showing lightning quick reflexes!");
+                toHit = hitDice.rollWithDisadvantage();
             }
-        } else {
-            Console.printLargePause("The attack missed.");
-            attacker.setLastAttackMissed(true);
+            case null, default -> toHit = hitDice.rollDice(1);
+        }
+        switch (attacker) {
+            case Mage mage -> {
+                if (mage.isAIControlled()) {
+                    String choice = mage.chooseSpellAI();
+                    Spell spell = SpellRegistry.getByName(choice);
+                    mage.castSpell(spell, mage, defender);
+                } else {
+                    Spell spell = mage.spellDecision(mage, defender);
+                    mage.castSpell(spell, mage, defender);
+                }
+            }
+            default -> {
+                if (toHit >= HIT_THRESHOLD) {
+                    Console.printSmallPause("It's a hit!");
+                    attacker.setLastAttackMissed(false);
+                    int damage = attacker.dealDamage(defender);
+                    int damageTaken = defender.takeDamage(damage, attacker);
+                    Console.printSmallPause(defender.getName() + " takes " + damageTaken + " damage.");
+                    if (defender instanceof Fighter fighter && fighter.shouldUseSecondWind()) {
+                        fighter.useSecondWind();
+                    }
+                } else {
+                    Console.printLargePause("The attack missed.");
+                    attacker.setLastAttackMissed(true);
+                }
+            }
         }
     }
 

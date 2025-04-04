@@ -5,11 +5,13 @@ public abstract class Character {
     private String className;
     private CharacterStats stats;
     public int currentHealth;
+    private boolean AIControlled;
     private boolean lastAttackMissed = false;
 
-    public Character(String name, CharacterStats stats, String className) {
+    public Character(String name, CharacterStats stats, String className, boolean AIControlled) {
         this.name = Console.cleanInput(name);
         this.className = className;
+        this.AIControlled = AIControlled;
         this.stats = stats;
         this.currentHealth = stats.maxHealth();
     }
@@ -25,6 +27,10 @@ public abstract class Character {
 
     public boolean isAlive () {
         return currentHealth > 0;
+    }
+
+    public boolean isAIControlled() {
+        return AIControlled;
     }
 
     public abstract int dealDamage(Character target);

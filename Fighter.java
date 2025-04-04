@@ -4,8 +4,8 @@ public class Fighter extends Character{
     private int stamina;
     private boolean hasUsedSecondWind;
 
-    public Fighter(String name, CharacterStats stats, String className) {
-        super(name, stats, className);
+    public Fighter(String name, CharacterStats stats, String className, boolean isAIControlled) {
+        super(name, stats, className, isAIControlled);
     }
 
     public boolean shouldUseSecondWind() {

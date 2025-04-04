@@ -1,15 +1,16 @@
 package com.RPGProject;
 
 public class PartyManager {
-    public static Character createCharacter(String role) {
-        String className = Console.readClass("Please choose " + role
-                + ": Fighter, Mage, or Rogue.").toLowerCase();
-        String characterName = Console.readName("What is the name of " + role + "?");
+    private static String[] classOptions = { "Fighter", "Mage", "Rogue" };
+
+    public static Character createCharacter(String role, boolean isAIControlled) {
+        String className = Console.readChoice("Please choose your " + role, classOptions).toLowerCase();
+        String characterName = Console.readText("What is the name of your " + role + "?");
 
         return switch (className) {
-            case "fighter" -> new Fighter(characterName, StatsTemplates.FIGHTER, "Fighter");
-            case "mage" -> new Mage(characterName, StatsTemplates.MAGE, "Mage");
-            case "rogue" -> new Rogue(characterName, StatsTemplates.ROGUE, "Rogue");
+            case "fighter" -> new Fighter(characterName, StatsTemplates.FIGHTER, "Fighter", isAIControlled);
+            case "mage" -> new Mage(characterName, StatsTemplates.MAGE, "Mage", isAIControlled, 10);
+            case "rogue" -> new Rogue(characterName, StatsTemplates.ROGUE, "Rogue", isAIControlled);
             default -> throw new IllegalArgumentException("Invalid class: " + className);
         };
     }

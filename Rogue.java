@@ -3,8 +3,8 @@ package com.RPGProject;
 public class Rogue extends Character{
     private int guile;
 
-    public Rogue(String name, CharacterStats stats, String className) {
-        super(name, stats, className);
+    public Rogue(String name, CharacterStats stats, String className, boolean isAIControlled) {
+        super(name, stats, className, isAIControlled);
     }
 
     @Override

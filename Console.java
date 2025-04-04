@@ -5,23 +5,32 @@ import java.util.Set;
 
 public class Console {
     private static Scanner scanner = new Scanner(System.in);
-    private static final Set<String> VALID_CLASSES = Set.of("Fighter", "Mage", "Rogue");
 
-    public static String readClass(String prompt) {
-        String value;
+    public static String readChoice(String prompt, String[] options) {
+        int choiceNumber = -1;
+
         while (true) {
             System.out.println(prompt);
-            value = scanner.nextLine().trim();
-            if (value.equalsIgnoreCase("Fighter") ||
-                value.equalsIgnoreCase("Mage") ||
-                value.equalsIgnoreCase("Rogue")) {
-            break;
+            for (int i = 0; i < options.length; i++) {
+                System.out.println((i + 1) + ") " + options[i]);
             }
-            System.out.println("Please type the name of one of the listed combatants.");
+            System.out.println("Enter your choice number: ");
+            //checking if input is an integer and within the bounds of choices
+            if (scanner.hasNextInt()) {
+                choiceNumber = scanner.nextInt();
+                if (choiceNumber >=1 && choiceNumber <= options.length) {
+                    break;
+                }
+            } else {
+                // clears input
+                scanner.next();
+            }
+            System.out.println("Invalid. Please select a number from the available options.");
         }
-        return value;
+        return options[choiceNumber -1];
     }
-    public static String readName(String prompt) {
+
+    public static String readText(String prompt) {
         String value;
         while (true) {
             System.out.println(prompt);
