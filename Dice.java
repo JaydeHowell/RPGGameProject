@@ -62,6 +62,14 @@ public class Dice {
         return Math.min(firstRoll, secondRoll);
     }
 
+    public int rollWithAdvantage() {
+        int firstRoll = rollDice(1);
+        int secondRoll = rollDice(1);
+        Console.printSmallPause("Taking the higher of " + firstRoll
+                + " and " + secondRoll);
+        return Math.max(firstRoll, secondRoll);
+    }
+
     public void setSides(int sides) {
         if (sides < 2) {
             throw new IllegalArgumentException("There cannot be fewer than 2 sides on a die.");
