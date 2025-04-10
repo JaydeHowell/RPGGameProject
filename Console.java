@@ -54,12 +54,12 @@ public class Console {
 
     public static void printSmallPause(String input) {
         System.out.println(input);
-        Console.pause(500);
+        pause(500);
     }
 
     public static void printLargePause(String input) {
         System.out.println(input);
-        Console.pause(1000);
+        pause(1000);
     }
 
     public static String cleanInput(String input) {
